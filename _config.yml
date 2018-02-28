@@ -20,9 +20,9 @@ navigation:
    url: /contact
 
 social:
-   github: https://github.com/ErikPassos
-   twitter: https://twitter.com/ErikPassos7
-   facebook: https://www.facebook.com/erik.fernando.96
-   email: brimaidesigns@gmail.com
+   github: /ErikPassos
+   twitter: /ErikPassos7
+   facebook: /erik.fernando.96
+   email: erikfernando7@gmail.com
 
 google_analytics: "Google"
