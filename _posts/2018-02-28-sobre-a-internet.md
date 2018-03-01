@@ -20,7 +20,7 @@ Assim, no dia 29 de outubro de 1969 foi estabelecida a primeira conexão entre a
 Já na década de 90, o cientista, físico e professor britânico Tim Berners-Lee desenvolveu um navegador ou browser, a World Wide Web (www), a Rede Mundial de Computadores - Internet.
 <blockquote>
  
-<img src="../assets/img/internet.jpg" class="img" alt="Tim Berners-Lee, criador da World Wide Web" aria-label="screen readers>
+<img src="../assets/img/internet.jpg" class="img" alt="Tim Berners-Lee, criador da World Wide Web" aria-label="screen readers">
  
 </blockquote>
 
