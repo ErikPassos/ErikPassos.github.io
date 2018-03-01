@@ -21,7 +21,8 @@ Já na década de 90, o cientista, físico e professor britânico Tim Berners-Le
 <blockquote>
  
 
-[![Tim Berners-Lee, criador da World Wide Web](../assets/img/internet.jpg)*Tim Berners-Lee, criador da World Wide Web*]
+[![Tim Berners-Lee, criador da World Wide Web](/assets/img/internet.jpg)]
+<img src="{{ '/assets/img/internet.jpg' | prepend: site.baseurl }}" alt="Tim Berners-Lee, criador da World Wide Web">
  
 </blockquote>
 
