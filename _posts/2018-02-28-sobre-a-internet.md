@@ -21,7 +21,7 @@ Já na década de 90, o cientista, físico e professor britânico Tim Berners-Le
 <blockquote>
  
 
-
+<h3>Tim Berners-Lee, criador da World Wide Web</h3>
 <img src="{{ '/assets/img/internet.jpg' | prepend: site.baseurl }}" alt="Tim Berners-Lee, criador da World Wide Web" aria-label= "screen reader">
  
 </blockquote>
