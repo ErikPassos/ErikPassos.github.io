@@ -5,11 +5,11 @@ date:   2018-02-28
 description: Um pouco sobre a história da internet! web, informática, ti.
 ---
 
-<h1 class="meta"><b>História da Internet</b></h1>
+<h1 class="meta pagetitle">História da Internet</h1>
 <br>
 <p class="intro tagline"><span class="dropcap">A</span> história da internet começa no ambiente da Guerra Fria (1945-1991) onde as duas super potências envolvidas, Estados unidos e URSS, estavam divididos nos blocos socialista e capitalista e disputavam poderes e hegemonias.</p>
 <br>
-<h1 class="meta"><b>História da Internet</b></h1>
+<h1 class="meta h1">Internet</h1>
 <br>
 Nesse panorama, os Estados Unidos, temendo ataques da Rússia, criou um sistema de compartilhamento de informações, a fim de facilitar as estratégias de guerra.
 
@@ -20,7 +20,7 @@ Assim, no dia 29 de outubro de 1969 foi estabelecida a primeira conexão entre a
 Já na década de 90, o cientista, físico e professor britânico Tim Berners-Lee desenvolveu um navegador ou browser, a World Wide Web (www), a Rede Mundial de Computadores - Internet.
 <blockquote>
  
-<img src="./assets/img/internet.jpg">
+<img src="../assets/img/internet.jpg" class="img" alt="Tim Berners-Lee, criador da World Wide Web" aria-label="screen readers>
  
 </blockquote>
 
@@ -34,7 +34,7 @@ Hoje em dia, a Internet é utilizada mundialmente como ferramenta de trabalho, d
 
 Além disso, pelo fato de os impostos serem menores, muitos produtos são comercializados em sites de compras.
 <br>
-<h1 class="meta"><b>Internet no Brasil</b></h1>
+<h1 class="meta h1"><b>Internet no Brasil</b></h1>
 <br>
 A Internet chegou no Brasil em 1988 por iniciativa da comunidade acadêmica de São Paulo (FAPESP - Fundação de Amparo à Pesquisa do Estado de São Paulo) e Rio de Janeiro UFRJ (Universidade Federal do Rio de Janeiro) e LNCC (Laboratório Nacional de Computação Científica). 
 
@@ -49,7 +49,7 @@ Em paralelo a isso, a partir de abril/1995 foi iniciada pela RNP um processo par
 Uma primeira etapa da expansão desse backbone foi concluída em dezembro/1995, restando ainda a criação de POP's em mais estados; além disso, algumas empresas (IBM, UNISYS, Banco Rural) anunciam em 1996 a inauguração de backbones próprios.
 
 <br>
-<h1 class="meta"><b>Marco Civil da Internet</b></h1>
+<h1 class="meta h1"><b>Marco Civil da Internet</b></h1>
 <br>
 A presidenta Dilma Rousseff regulamentou nesta quarta-feira (11) o Marco Civil da Internet. O decreto publicado na edição extra do Diário Oficial da União trata da neutralidade de rede e do tratamento dos dados pessoais dos usuários . O texto estabelece que o Comitê Gestor da Internet no Brasil (CGI.br) será responsável por determinar as diretrizes da internet no País. O Marco Civil da Internet foi aprovado pelo Senado no dia 23 de abril de 2014. As regras que regulamentam a lei foram elaboradas por meio de quatro consultas públicas elaboradas pela Agência Nacional de Telecomunicações, CGI e Ministério da Justiça.
 
