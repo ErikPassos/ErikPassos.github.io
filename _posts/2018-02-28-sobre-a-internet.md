@@ -20,7 +20,7 @@ Assim, no dia 29 de outubro de 1969 foi estabelecida a primeira conexão entre a
 Já na década de 90, o cientista, físico e professor britânico Tim Berners-Lee desenvolveu um navegador ou browser, a World Wide Web (www), a Rede Mundial de Computadores - Internet.
 <blockquote>
  
-![Imagem]{/assets/img/internet.jpg *Tim Berners-Lee, criador da World Wide Web*}
+<img src="./assets/img/internet.jpg">
  
 </blockquote>
 
@@ -49,7 +49,7 @@ Em paralelo a isso, a partir de abril/1995 foi iniciada pela RNP um processo par
 Uma primeira etapa da expansão desse backbone foi concluída em dezembro/1995, restando ainda a criação de POP's em mais estados; além disso, algumas empresas (IBM, UNISYS, Banco Rural) anunciam em 1996 a inauguração de backbones próprios.
 
 <br>
-<h1 class="meta"><b>Internet no Brasil</b></h1>
+<h1 class="meta"><b>Marco Civil da Internet</b></h1>
 <br>
 A presidenta Dilma Rousseff regulamentou nesta quarta-feira (11) o Marco Civil da Internet. O decreto publicado na edição extra do Diário Oficial da União trata da neutralidade de rede e do tratamento dos dados pessoais dos usuários . O texto estabelece que o Comitê Gestor da Internet no Brasil (CGI.br) será responsável por determinar as diretrizes da internet no País. O Marco Civil da Internet foi aprovado pelo Senado no dia 23 de abril de 2014. As regras que regulamentam a lei foram elaboradas por meio de quatro consultas públicas elaboradas pela Agência Nacional de Telecomunicações, CGI e Ministério da Justiça.
 
