@@ -1,4 +1,3 @@
-# Olá me chamo Erik F. B. Passos
 
 ## Sobre mim
 
