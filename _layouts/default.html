@@ -26,26 +26,40 @@
       content="{{ page.description | default: site.description }}"
     >
 
-    {{ '/assets/css/style.css' | relative_url }}
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/style.css' | relative_url }}"
+    >
 
     <script>
       (function () {
-        const temaSalvo =
-          localStorage.getItem("tema-preferido");
+        try {
+          const temaSalvo =
+            localStorage.getItem("tema-preferido");
 
-        const prefereEscuro =
-          window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
+          const prefereEscuro =
+            window.matchMedia(
+              "(prefers-color-scheme: dark)"
+            ).matches;
 
-        const tema =
-          temaSalvo ||
-          (prefereEscuro ? "dark" : "light");
+          const temaInicial =
+            temaSalvo === "light" ||
+            temaSalvo === "dark"
+              ? temaSalvo
+              : prefereEscuro
+                ? "dark"
+                : "light";
 
-        document.documentElement.setAttribute(
-          "data-theme",
-          tema
-        );
+          document.documentElement.setAttribute(
+            "data-theme",
+            temaInicial
+          );
+        } catch (erro) {
+          document.documentElement.setAttribute(
+            "data-theme",
+            "light"
+          );
+        }
       })();
     </script>
   </head>
@@ -59,8 +73,8 @@
       id="alternar-tema"
       class="botao-tema"
       type="button"
-      aria-label="Alternar tema"
-      title="Alternar tema"
+      aria-label="Ativar tema escuro"
+      title="Ativar tema escuro"
     >
       <span
         class="tema-icone"
@@ -98,8 +112,7 @@
 
       <footer class="site-footer">
         <span class="site-footer-owner">
-          Conteúdo desenvolvido por
-          Erik F. B. Passos.
+          Conteúdo desenvolvido por Erik F. B. Passos.
         </span>
       </footer>
     </main>
