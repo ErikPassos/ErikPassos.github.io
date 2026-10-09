@@ -33,4 +33,4 @@ Nesta página, registrarei meus erros e aprendizados relacionados a todos
 esses assuntos. O conteúdo servirá como base de conhecimento e como
 instrumento para acompanhar e mensurar minha aprendizagem ao longo do tempo.
 
-./
+
