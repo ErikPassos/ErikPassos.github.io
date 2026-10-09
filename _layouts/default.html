@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'pt-BR' }}">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+      name="theme-color"
+      content="#155799"
+    >
+
+    <title>
+      {% if page.title %}
+        {{ page.title }} | {{ site.title }}
+      {% else %}
+        {{ site.title }}
+      {% endif %}
+    </title>
+
+    <meta
+      name="description"
+      content="{{ page.description | default: site.description }}"
+    >
+
+    {{ '/assets/css/style.css' | relative_url }}
+
+    <script>
+      (function () {
+        const temaSalvo =
+          localStorage.getItem("tema-preferido");
+
+        const prefereEscuro =
+          window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+
+        const tema =
+          temaSalvo ||
+          (prefereEscuro ? "dark" : "light");
+
+        document.documentElement.setAttribute(
+          "data-theme",
+          tema
+        );
+      })();
+    </script>
+  </head>
+
+  <body>
+    #conteudo-principal
+      Pular para o conteúdo
+    </a>
+
+    <button
+      id="alternar-tema"
+      class="botao-tema"
+      type="button"
+      aria-label="Alternar tema"
+      title="Alternar tema"
+    >
+      <span
+        class="tema-icone"
+        aria-hidden="true"
+      >
+        🌙
+      </span>
+
+      <span class="tema-texto">
+        Tema escuro
+      </span>
+    </button>
+
+    <header
+      class="page-header"
+      role="banner"
+    >
+      <h1 class="project-name">
+        {{ site.title }}
+      </h1>
+
+      {% if site.description %}
+        <h2 class="project-tagline">
+          {{ site.description }}
+        </h2>
+      {% endif %}
+    </header>
+
+    <main
+      id="conteudo-principal"
+      class="main-content"
+      role="main"
+    >
+      {{ content }}
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">
+          Conteúdo desenvolvido por
+          Erik F. B. Passos.
+        </span>
+      </footer>
+    </main>
+
+    {{ '/assets/js/tema.js' | relative_url }}script>
+  </body>
+</html>
