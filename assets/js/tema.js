@@ -7,60 +7,16 @@
 
   const raiz = document.documentElement;
 
-  function obterTemaDoSistema() {
-    const consulta = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-
-    return consulta.matches
-      ? TEMA_ESCURO
-      : TEMA_CLARO;
-  }
-
-  function obterTemaSalvo() {
-    try {
-      const temaSalvo =
-        localStorage.getItem(CHAVE_TEMA);
-
-      if (
-        temaSalvo === TEMA_CLARO ||
-        temaSalvo === TEMA_ESCURO
-      ) {
-        return temaSalvo;
-      }
-    } catch (erro) {
-      console.warn(
-        "Não foi possível consultar o tema salvo.",
-        erro
-      );
-    }
-
-    return null;
-  }
-
   function obterTemaAtual() {
-    const temaAtual =
-      raiz.getAttribute("data-theme");
-
-    if (
-      temaAtual === TEMA_CLARO ||
-      temaAtual === TEMA_ESCURO
-    ) {
-      return temaAtual;
-    }
-
-    return TEMA_CLARO;
+    return raiz.getAttribute("data-theme") || TEMA_CLARO;
   }
 
   function salvarTema(tema) {
     try {
-      localStorage.setItem(
-        CHAVE_TEMA,
-        tema
-      );
+      localStorage.setItem(CHAVE_TEMA, tema);
     } catch (erro) {
       console.warn(
-        "Não foi possível salvar o tema.",
+        "Não foi possível salvar a preferência de tema.",
         erro
       );
     }
@@ -80,10 +36,7 @@
         ? "#0d1117"
         : "#155799";
 
-    metaCor.setAttribute(
-      "content",
-      cor
-    );
+    metaCor.setAttribute("content", cor);
   }
 
   function atualizarBotao(tema) {
@@ -103,10 +56,9 @@
       ".tema-texto"
     );
 
-    const estaEscuro =
-      tema === TEMA_ESCURO;
+    const modoEscuro = tema === TEMA_ESCURO;
 
-    if (estaEscuro) {
+    if (modoEscuro) {
       if (icone) {
         icone.textContent = "☀️";
       }
@@ -155,10 +107,7 @@
     }
   }
 
-  function aplicarTema(
-    tema,
-    deveSalvar
-  ) {
+  function aplicarTema(tema, persistir) {
     const temaValido =
       tema === TEMA_ESCURO
         ? TEMA_ESCURO
@@ -172,7 +121,7 @@
     atualizarBotao(temaValido);
     atualizarCorDoNavegador(temaValido);
 
-    if (deveSalvar) {
+    if (persistir) {
       salvarTema(temaValido);
     }
   }
@@ -185,70 +134,36 @@
         ? TEMA_CLARO
         : TEMA_ESCURO;
 
-    aplicarTema(
-      novoTema,
-      true
-    );
+    aplicarTema(novoTema, true);
   }
 
-  function iniciarSeletorDeTema() {
-    const temaInicial =
-      obterTemaSalvo() ||
-      obterTemaAtual() ||
-      obterTemaDoSistema();
-
-    aplicarTema(
-      temaInicial,
-      false
-    );
-
+  function iniciar() {
     const botao = document.getElementById(
       "alternar-tema"
     );
 
-    if (botao) {
-      botao.addEventListener(
-        "click",
-        alternarTema
+    atualizarBotao(obterTemaAtual());
+    atualizarCorDoNavegador(obterTemaAtual());
+
+    if (!botao) {
+      console.error(
+        "O botão de tema não foi encontrado."
       );
+      return;
     }
 
-    const consultaSistema =
-      window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      );
-
-    function acompanharSistema() {
-      const temaSalvo = obterTemaSalvo();
-
-      if (!temaSalvo) {
-        aplicarTema(
-          obterTemaDoSistema(),
-          false
-        );
-      }
-    }
-
-    if (consultaSistema.addEventListener) {
-      consultaSistema.addEventListener(
-        "change",
-        acompanharSistema
-      );
-    } else if (consultaSistema.addListener) {
-      consultaSistema.addListener(
-        acompanharSistema
-      );
-    }
+    botao.addEventListener(
+      "click",
+      alternarTema
+    );
   }
 
-  if (
-    document.readyState === "loading"
-  ) {
+  if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
-      iniciarSeletorDeTema
+      iniciar
     );
   } else {
-    iniciarSeletorDeTema();
+    iniciar();
   }
 })();

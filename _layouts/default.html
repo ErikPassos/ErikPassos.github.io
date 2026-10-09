@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'pt-BR' }}">
+<html
+  lang="{{ site.lang | default: 'pt-BR' }}"
+  data-theme="light"
+>
   <head>
     <meta charset="UTF-8">
 
@@ -27,31 +30,29 @@
       {% endif %}
     </title>
 
-    {{ '/assets/css/style.css' | relative_url }}
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/style.css' | relative_url }}"
+    >
 
     <script>
       (function () {
-        const CHAVE_TEMA = "tema-preferido";
-
         try {
           const temaSalvo =
-            localStorage.getItem(CHAVE_TEMA);
+            localStorage.getItem("tema-preferido");
 
           const sistemaEscuro =
             window.matchMedia(
               "(prefers-color-scheme: dark)"
             ).matches;
 
-          let temaInicial = "light";
-
-          if (
+          const temaInicial =
             temaSalvo === "light" ||
             temaSalvo === "dark"
-          ) {
-            temaInicial = temaSalvo;
-          } else if (sistemaEscuro) {
-            temaInicial = "dark";
-          }
+              ? temaSalvo
+              : sistemaEscuro
+                ? "dark"
+                : "light";
 
           document.documentElement.setAttribute(
             "data-theme",
