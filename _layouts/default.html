@@ -1,128 +1,60 @@
-<!DOCTYPE html>
-<html
-  lang="{{ site.lang | default: 'pt-BR' }}"
-  data-theme="light"
->
-  <head>
-    <meta charset="UTF-8">
+<!doctype html>
+<html lang="{{ site.lang | default: 'pt-BR' }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta id="theme-color" name="theme-color" content="#155799">
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 
-    <meta
-      name="description"
-      content="{{ page.description | default: site.description }}"
-    >
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-    <meta
-      id="meta-cor-tema"
-      name="theme-color"
-      content="#155799"
-    >
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('site-theme');
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initialTheme = savedTheme === 'dark' || savedTheme === 'light'
+          ? savedTheme
+          : (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initialTheme);
+      } catch (error) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }());
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
-    <title>
-      {% if page.title %}
-        {{ page.title }} | {{ site.title }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </title>
+  <button
+    id="theme-toggle"
+    class="theme-toggle"
+    type="button"
+    aria-label="Ativar tema escuro"
+    aria-pressed="false"
+    title="Ativar tema escuro"
+  >
+    <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle__text">Tema escuro</span>
+  </button>
 
-    <link
-      rel="stylesheet"
-      href="{{ '/assets/css/style.css' | relative_url }}"
-    >
+  <header class="page-header" role="banner">
+    <h1 class="project-name">{{ site.title }}</h1>
+    {% if site.description %}
+      <p class="project-tagline">{{ site.description }}</p>
+    {% endif %}
+  </header>
 
-    <script>
-      (function () {
-        try {
-          const temaSalvo =
-            localStorage.getItem("tema-preferido");
+  <main id="main-content" class="main-content" role="main" tabindex="-1">
+    {{ content }}
 
-          const sistemaEscuro =
-            window.matchMedia(
-              "(prefers-color-scheme: dark)"
-            ).matches;
+    <footer class="site-footer">
+      <span>Conteúdo desenvolvido por Erik F. B. Passos.</span>
+    </footer>
+  </main>
 
-          const temaInicial =
-            temaSalvo === "light" ||
-            temaSalvo === "dark"
-              ? temaSalvo
-              : sistemaEscuro
-                ? "dark"
-                : "light";
-
-          document.documentElement.setAttribute(
-            "data-theme",
-            temaInicial
-          );
-        } catch (erro) {
-          document.documentElement.setAttribute(
-            "data-theme",
-            "light"
-          );
-        }
-      })();
-    </script>
-  </head>
-
-  <body>
-    #conteudo-principal
-      Pular para o conteúdo
-    </a>
-
-    <button
-      id="alternar-tema"
-      class="botao-tema"
-      type="button"
-      aria-label="Ativar tema escuro"
-      aria-pressed="false"
-      title="Ativar tema escuro"
-    >
-      <span
-        class="tema-icone"
-        aria-hidden="true"
-      >
-        🌙
-      </span>
-
-      <span class="tema-texto">
-        Tema escuro
-      </span>
-    </button>
-
-    <header
-      class="page-header"
-      role="banner"
-    >
-      <h1 class="project-name">
-        {{ site.title }}
-      </h1>
-
-      {% if site.description %}
-        <h2 class="project-tagline">
-          {{ site.description }}
-        </h2>
-      {% endif %}
-    </header>
-
-    <main
-      id="conteudo-principal"
-      class="main-content"
-      role="main"
-      tabindex="-1"
-    >
-      {{ content }}
-
-      <footer class="site-footer">
-        <span class="site-footer-owner">
-          Conteúdo desenvolvido por Erik F. B. Passos.
-        </span>
-      </footer>
-    </main>
-
-    {{ '/assets/js/tema.js' | relative_url }}script>
-  </body>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+</body>
 </html>
