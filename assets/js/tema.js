@@ -1,55 +1,112 @@
 (function () {
-  const CHAVE_TEMA = "tema-preferido";
-  const elementoRaiz = document.documentElement;
+  "use strict";
 
-  function obterPreferenciaSistema() {
+  const CHAVE_TEMA = "tema-preferido";
+  const TEMA_CLARO = "light";
+  const TEMA_ESCURO = "dark";
+
+  const raiz = document.documentElement;
+
+  function obterTemaDoSistema() {
     const consulta = window.matchMedia(
       "(prefers-color-scheme: dark)"
     );
 
-    return consulta.matches ? "dark" : "light";
+    return consulta.matches
+      ? TEMA_ESCURO
+      : TEMA_CLARO;
   }
 
-  function obterTemaAtual() {
-    return (
-      elementoRaiz.getAttribute("data-theme") ||
-      "light"
-    );
-  }
-
-  function obterTemaInicial() {
+  function obterTemaSalvo() {
     try {
       const temaSalvo =
         localStorage.getItem(CHAVE_TEMA);
 
       if (
-        temaSalvo === "light" ||
-        temaSalvo === "dark"
+        temaSalvo === TEMA_CLARO ||
+        temaSalvo === TEMA_ESCURO
       ) {
         return temaSalvo;
       }
     } catch (erro) {
-      return obterPreferenciaSistema();
+      console.warn(
+        "Não foi possível consultar o tema salvo.",
+        erro
+      );
     }
 
-    return obterPreferenciaSistema();
+    return null;
+  }
+
+  function obterTemaAtual() {
+    const temaAtual =
+      raiz.getAttribute("data-theme");
+
+    if (
+      temaAtual === TEMA_CLARO ||
+      temaAtual === TEMA_ESCURO
+    ) {
+      return temaAtual;
+    }
+
+    return TEMA_CLARO;
+  }
+
+  function salvarTema(tema) {
+    try {
+      localStorage.setItem(
+        CHAVE_TEMA,
+        tema
+      );
+    } catch (erro) {
+      console.warn(
+        "Não foi possível salvar o tema.",
+        erro
+      );
+    }
+  }
+
+  function atualizarCorDoNavegador(tema) {
+    const metaCor = document.getElementById(
+      "meta-cor-tema"
+    );
+
+    if (!metaCor) {
+      return;
+    }
+
+    const cor =
+      tema === TEMA_ESCURO
+        ? "#0d1117"
+        : "#155799";
+
+    metaCor.setAttribute(
+      "content",
+      cor
+    );
   }
 
   function atualizarBotao(tema) {
-    const botao =
-      document.getElementById("alternar-tema");
+    const botao = document.getElementById(
+      "alternar-tema"
+    );
 
     if (!botao) {
       return;
     }
 
-    const icone =
-      botao.querySelector(".tema-icone");
+    const icone = botao.querySelector(
+      ".tema-icone"
+    );
 
-    const texto =
-      botao.querySelector(".tema-texto");
+    const texto = botao.querySelector(
+      ".tema-texto"
+    );
 
-    if (tema === "dark") {
+    const estaEscuro =
+      tema === TEMA_ESCURO;
+
+    if (estaEscuro) {
       if (icone) {
         icone.textContent = "☀️";
       }
@@ -66,6 +123,11 @@
       botao.setAttribute(
         "title",
         "Ativar tema claro"
+      );
+
+      botao.setAttribute(
+        "aria-pressed",
+        "true"
       );
     } else {
       if (icone) {
@@ -85,94 +147,108 @@
         "title",
         "Ativar tema escuro"
       );
+
+      botao.setAttribute(
+        "aria-pressed",
+        "false"
+      );
     }
   }
 
-  function aplicarTema(tema, salvarEscolha) {
-    elementoRaiz.setAttribute(
+  function aplicarTema(
+    tema,
+    deveSalvar
+  ) {
+    const temaValido =
+      tema === TEMA_ESCURO
+        ? TEMA_ESCURO
+        : TEMA_CLARO;
+
+    raiz.setAttribute(
       "data-theme",
-      tema
+      temaValido
     );
 
-    if (salvarEscolha) {
-      try {
-        localStorage.setItem(
-          CHAVE_TEMA,
-          tema
-        );
-      } catch (erro) {
-        console.warn(
-          "Não foi possível salvar o tema."
-        );
-      }
-    }
+    atualizarBotao(temaValido);
+    atualizarCorDoNavegador(temaValido);
 
-    atualizarBotao(tema);
+    if (deveSalvar) {
+      salvarTema(temaValido);
+    }
   }
 
-  aplicarTema(obterTemaInicial(), false);
+  function alternarTema() {
+    const temaAtual = obterTemaAtual();
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-      atualizarBotao(obterTemaAtual());
+    const novoTema =
+      temaAtual === TEMA_ESCURO
+        ? TEMA_CLARO
+        : TEMA_ESCURO;
 
-      const botao =
-        document.getElementById(
-          "alternar-tema"
-        );
+    aplicarTema(
+      novoTema,
+      true
+    );
+  }
 
-      if (!botao) {
-        return;
-      }
+  function iniciarSeletorDeTema() {
+    const temaInicial =
+      obterTemaSalvo() ||
+      obterTemaAtual() ||
+      obterTemaDoSistema();
 
+    aplicarTema(
+      temaInicial,
+      false
+    );
+
+    const botao = document.getElementById(
+      "alternar-tema"
+    );
+
+    if (botao) {
       botao.addEventListener(
         "click",
-        function () {
-          const temaAtual =
-            obterTemaAtual();
-
-          const novoTema =
-            temaAtual === "dark"
-              ? "light"
-              : "dark";
-
-          aplicarTema(novoTema, true);
-        }
+        alternarTema
       );
     }
-  );
 
-  const consultaTema = window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  );
+    const consultaSistema =
+      window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
 
-  function acompanharPreferenciaSistema() {
-    let temaSalvo = null;
+    function acompanharSistema() {
+      const temaSalvo = obterTemaSalvo();
 
-    try {
-      temaSalvo =
-        localStorage.getItem(CHAVE_TEMA);
-    } catch (erro) {
-      temaSalvo = null;
+      if (!temaSalvo) {
+        aplicarTema(
+          obterTemaDoSistema(),
+          false
+        );
+      }
     }
 
-    if (!temaSalvo) {
-      aplicarTema(
-        obterPreferenciaSistema(),
-        false
+    if (consultaSistema.addEventListener) {
+      consultaSistema.addEventListener(
+        "change",
+        acompanharSistema
+      );
+    } else if (consultaSistema.addListener) {
+      consultaSistema.addListener(
+        acompanharSistema
       );
     }
   }
 
-  if (consultaTema.addEventListener) {
-    consultaTema.addEventListener(
-      "change",
-      acompanharPreferenciaSistema
+  if (
+    document.readyState === "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      iniciarSeletorDeTema
     );
-  } else if (consultaTema.addListener) {
-    consultaTema.addListener(
-      acompanharPreferenciaSistema
-    );
+  } else {
+    iniciarSeletorDeTema();
   }
 })();
