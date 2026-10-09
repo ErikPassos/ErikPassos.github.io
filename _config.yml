@@ -2,3 +2,6 @@ title: Erik F. B. Passos
 description: Dados, Business Intelligence e Security Analytics
 theme: jekyll-theme-cayman
 lang: pt-BR
+
+github:
+  is_project_page: false
